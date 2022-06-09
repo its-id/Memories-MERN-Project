@@ -15,7 +15,6 @@ app.use(cors());
 
 app.use("/posts", postRoutes);
 
-
 const CONNECTION_URL =
   "mongodb+srv://its-ikd:QxAIE7kAEXkGw49L@cluster0.aiume.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
@@ -26,4 +25,6 @@ mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: tr
     .catch((error) => console.log(error.message));
 
 // https://www.mongodb.com/cloud/atlas
+
+
 
