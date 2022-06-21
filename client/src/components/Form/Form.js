@@ -6,8 +6,10 @@ import FileBase from "react-file-base64";
 import useStyles from "./styles";
 import { createPost, updatePost } from "../../actions/posts";
 
-const Form = ( {currentId, setCurrentId} ) => {
-  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+const Form = ({ currentId, setCurrentId }) => {
+  const post = useSelector((state) =>
+    currentId ? state.posts.find((p) => p._id === currentId) : null
+  );
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
@@ -15,14 +17,14 @@ const Form = ( {currentId, setCurrentId} ) => {
     tags: "",
     selectedFile: "",
   });
-//   const post = useSelector((state) =>
-//     currentId ? state.posts.find((message) => message._id === currentId) : null
-//   );
+  //   const post = useSelector((state) =>
+  //     currentId ? state.posts.find((message) => message._id === currentId) : null
+  //   );
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  useEffect(()=>{
-    if(post) setPostData(post);
+  useEffect(() => {
+    if (post) setPostData(post);
   }, [post]);
 
   const handleSubmit = async (e) => {
@@ -30,15 +32,15 @@ const Form = ( {currentId, setCurrentId} ) => {
 
     if (!currentId) {
       dispatch(createPost(postData));
-      clear();
     } else {
       dispatch(updatePost(currentId, postData));
-      clear();
     }
+    
+    clear();
   };
 
   const clear = () => {
-    // setCurrentId(0);
+    setCurrentId(null);
     setPostData({
       creator: "",
       title: "",
@@ -57,8 +59,7 @@ const Form = ( {currentId, setCurrentId} ) => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
-          Creating a Memory
-          {/* {currentId ? `Editing "${post.title}"` : "Creating a Memory"} */}
+          {currentId ? `Editing "${post.title}"` : "Creating a Memory"}
         </Typography>
         <TextField
           name="creator"
