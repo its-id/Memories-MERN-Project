@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Button,
@@ -6,13 +6,10 @@ import {
   Grid,
   Typography,
   Container,
-  TextField,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import GoogleLogin from 'react-google-login';
 
 import Input from "./Input";
-import Icon from './icon';
 import useStyles from "./styles";
 
 const Auth = () => {
@@ -33,13 +30,22 @@ const Auth = () => {
   };
 
   const googleSuccess = async (res) => {
-    console.log(res);
-  }
-
-  const googleFailure = (error) => {
-    console.log(error);
-    console.log('Google Sign In was unsuccessful! Try again Later.')
+    console.log("Encoded JWT ID Token: " + res.credential);
   };
+
+  useEffect(() => {
+    // global google
+    google.accounts.id.initialize({
+      client_id:
+        "336085599881-bqa9blk7ar7k0oq1dficdheo26erftt1.apps.googleusercontent.com",
+      callback: googleSuccess,
+    });
+
+    google.accounts.id.renderButton(document.getElementById("googleSignIn"), {
+      theme: "",
+      size: "large",
+    });
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -98,25 +104,14 @@ const Auth = () => {
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
-          <GoogleLogin
-            clientId="336085599881-bqa9blk7ar7k0oq1dficdheo26erftt1.apps.googleusercontent.com"
-            render={(renderProps) => (
-              <Button
-                className={classes.googleButton}
-                color="primary"
-                fullWidth
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                startIcon={<Icon />}
-                variant="contained"
-              >
-                Google Sign In
-              </Button>
-            )}
-            onSuccess={googleSuccess}
-            onFailure={googleFailure}
-            cookiePolicy="single_host_origin"
-          ></GoogleLogin>
+          <Button
+            className={classes.googleButton}
+            id="googleSignIn"
+            fullWidth
+            variant="text"
+          >
+            Google Sign In
+          </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
