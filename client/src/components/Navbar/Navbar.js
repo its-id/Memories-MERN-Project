@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AppBar, Avatar, Typography, Toolbar, Button } from "@material-ui/core";
 
@@ -7,7 +7,10 @@ import memories from "../../images/memories.png";
 
 const Navbar = () => {
   const classes = useStyles();
-  const user = null;
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
+  console.log(user);
+
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
@@ -19,7 +22,7 @@ const Navbar = () => {
       <div className={classes.toolbar}>
         {user ? (
           <div className={classes.profile}>
-            <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>
+            <Avatar className={classes.purple} alt={user.result.name} src={user.result.picture}>
               {user.result.name.charAt(0)}
             </Avatar>
             <Typography className={classes.userName} variant="h6">
