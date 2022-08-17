@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import jwt_decode from 'jwt-decode';
+import { useDispatch } from "react-redux";
+
+
 import { Avatar, Button, Paper, Grid, Typography, Container } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
@@ -9,6 +13,7 @@ const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  const dispatch = useDispatch();
 
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
@@ -22,7 +27,15 @@ const Auth = () => {
   };
 
   const googleSuccess = async (res) => {
-    console.log("Encoded JWT ID Token: " + res.credential);
+    const token = res?.credential;
+    const result = jwt_decode(res?.credential); 
+    console.log(result); // ? -> helps in not giving error if the obj does not exist
+
+    try {
+      dispatch({ type: "AUTH", data: { result , token } });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
