@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import {signin, signup} from '../../actions/auth';
+import { signin, signup } from "../../actions/auth";
 import { Avatar, Button, Paper, Grid, Typography, Container } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
@@ -32,12 +32,11 @@ const Auth = () => {
     e.preventDefault();
     console.log(formData);
 
-    if(isSignup){
-      dispatch(signup(formData, history))
-    }else{
+    if (isSignup) {
+      dispatch(signup(formData, history));
+    } else {
       dispatch(signin(formData, history));
     }
-
   };
 
   const handleChange = (e) => {
@@ -46,7 +45,7 @@ const Auth = () => {
 
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
-    handleShowPassword(false);
+    setShowPassword(false);
   };
 
   const googleSuccess = async (res) => {
