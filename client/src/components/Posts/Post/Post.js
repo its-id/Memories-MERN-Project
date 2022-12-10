@@ -71,11 +71,13 @@ const Post = ({ post, setCurrentId }) => {
         <Typography variant="h6">{post?.name}</Typography>
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
       </div>
-      <div className={classes.overlay2}>
-        <Button style={{ color: "white" }} size="small" onClick={() => setCurrentId(post?._id)}>
-          <MoreHorizIcon fontSize="medium" />
-        </Button>
-      </div>
+      {(userId === post?.creator || userId === post?.creator) && (
+        <div className={classes.overlay2}>
+          <Button style={{ color: "white" }} size="small" onClick={() => setCurrentId(post?._id)}>
+            <MoreHorizIcon fontSize="medium" />
+          </Button>
+        </div>
+      )}
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary" component="h2">
           {post.tags.map((tag) => `#${tag} `)}
@@ -93,10 +95,12 @@ const Post = ({ post, setCurrentId }) => {
         <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
           <Likes />
         </Button>
-        <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
-          <DeleteIcon fontSize="small" />
-          &nbsp;Delete
-        </Button>
+        {(userId === post?.creator || userId === post?.creator) && (
+          <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
+            <DeleteIcon fontSize="small" />
+            &nbsp;Delete
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
