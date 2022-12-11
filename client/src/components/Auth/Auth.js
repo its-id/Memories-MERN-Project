@@ -66,7 +66,7 @@ const Auth = () => {
   useEffect(() => {
     // global google
     google.accounts.id.initialize({
-      client_id: "336085599881-bqa9blk7ar7k0oq1dficdheo26erftt1.apps.googleusercontent.com",
+      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       callback: googleSuccess,
     });
 
