@@ -71,7 +71,7 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
     <Card className={classes.card} raised elevation={6}>
-      <ButtonBase className={classes.cardAction} onClick={openPost}>
+      <ButtonBase component="span" className={classes.cardAction} onClick={openPost}>
         <CardMedia
           className={classes.media}
           image={
