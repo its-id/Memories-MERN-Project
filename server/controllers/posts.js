@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
 
+// QUERY -> /posts?page=1 -> page = 1
 export const getPosts = async (req, res) => {
   const { page } = req.query;
   try {
-    const LIMIT = 8;
+    const LIMIT = 6;
     const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
     const total = await PostMessage.countDocuments({}); // count the total number of posts
 
@@ -18,7 +19,6 @@ export const getPosts = async (req, res) => {
   }
 };
 
-// QUERY -> /posts?page=1 -> page = 1
 // PARAMS -> /posts/123 -> id = 123
 export const getPostsBySearch = async (req, res) => {
   const { searchQuery, tags } = req.query;

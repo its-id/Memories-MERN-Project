@@ -16,7 +16,7 @@ const Posts = ({ setCurrentId }) => {
   ) : (
     <Grid className={classes.container} container align="strech" spacing={3}>
       {posts?.map((post, index) => (
-        <Grid key={`${index}_${post.id}`} item xs={12} sm={12} md={6} lg={3}>
+        <Grid key={`${index}_${post.id}`} item xs={12} sm={12} md={6} lg={4}>
           <Post post={post} setCurrentId={setCurrentId} />
         </Grid>
       ))}
