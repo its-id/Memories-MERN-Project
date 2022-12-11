@@ -8,6 +8,7 @@ import {
   FETCH_BY_SEARCH,
   START_LOADING,
   END_LOADING,
+  COMMENT,
 } from "../constants/actionTypes";
 
 export default (state = { isLoading: true, posts: [] }, action) => {
@@ -50,6 +51,17 @@ export default (state = { isLoading: true, posts: [] }, action) => {
 
     case DELETE:
       return { ...state, posts: state.posts.filter((post) => post._id !== action.payload) };
+
+    case COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          // change the post that just received a comment
+          if (post._id === action.payload._id) return action.payload;
+
+          return post; // return all the other posts normally
+        }),
+      };
 
     default:
       return state;

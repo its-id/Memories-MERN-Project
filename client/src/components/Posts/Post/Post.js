@@ -110,7 +110,7 @@ const Post = ({ post, setCurrentId }) => {
           <Likes />
         </Button>
         {(userId === post?.creator || userId === post?.creator) && (
-          <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
+          <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
             <DeleteIcon fontSize="small" />
             &nbsp;Delete
           </Button>
