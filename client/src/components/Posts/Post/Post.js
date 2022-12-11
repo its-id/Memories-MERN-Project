@@ -32,12 +32,12 @@ const Post = ({ post, setCurrentId }) => {
   const hasLikedPost = post?.likes.find((like) => like === userId);
 
   const handleLike = async () => {
-    dispatch(likePost(post._id));
+    dispatch(likePost(post?._id));
 
     if (hasLikedPost) {
-      setLikes(post.likes.filter((id) => id !== userId));
+      setLikes(post?.likes.filter((id) => id !== userId)); //
     } else {
-      setLikes([...post.likes, userId]);
+      setLikes([...post?.likes, userId]);
     }
   };
 
@@ -93,7 +93,7 @@ const Post = ({ post, setCurrentId }) => {
         )}
         <div className={classes.details}>
           <Typography variant="body2" color="textSecondary" component="h2">
-            {post.tags.map((tag) => `#${tag} `)}
+            {post?.tags.map((tag) => `#${tag} `)}
           </Typography>
         </div>
         <Typography className={classes.title} gutterBottom variant="h5" component="h2">
