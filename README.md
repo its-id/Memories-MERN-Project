@@ -9,6 +9,8 @@ A Full Stack MERN Application called "Memories" that allows users to post intere
 ## Steps to Replicate! 
 
 **Frontend**:
+- Go to the server folder.
+- Create a ".env" file enter the SECRETS in the format as in the file .env.example. 
 - Open terminal in the cloned repository.
 - Type `cd client`.
 - Type `npm install`.
